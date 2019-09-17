@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MakeMusic</title>
+</head>
+<body>
+  <h1>Header</h1>
+  <p>✨ Paragraph.</p>
+  <meta name="viewport" content="initial-scale=1.0">
+  <meta charset="utf-8">
+  <style>
+  #map {
+    height: 50vh;
+    width: 100vw;
+  }
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  </style>
+</head>
+<body>
+
+  <div id="map"></div>
+  <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+
+  <script>
+  var map;
+  function initMap() {
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: 40.035271, lng: -105.1733},
+      zoom: 11.5
+    });
+  }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhP2quHF1DaIKiuvKxjIC9QKHqgzZISDk&callback=initMap"
+  async defer></script>
+
+
+</body>
+</html>
