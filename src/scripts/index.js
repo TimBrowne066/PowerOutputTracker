@@ -174,30 +174,61 @@ function  chartLoad() {
 		axisY: {
 			title: "Power"
 		},
+		legend: {
+            cursor: "pointer",
+            itemclick: function (e) {
+                //console.log("legend click: " + e.dataPointIndex);
+                console.log(e);
+                if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                    e.dataSeries.visible = false;
+                } else {
+                    e.dataSeries.visible = true;
+                }
+
+                e.chart.render();
+            }
+	  },
     data: [
-    {
-      type: "line",
-      dataPoints: totalPowerReadings
-    },
 		{
-			type: "line",
-			dataPoints: twentyMinuteReadings
+		      type: "line",
+			 showInLegend: true,
+			 legendText: "Entire Run",
+		      dataPoints: totalPowerReadings
 		},
 		{
 			type: "line",
-			dataPoints: fifteenMinuteReadings
+			showInLegend: true,
+			legendText: "Best 20 Minutes",
+			dataPoints: twentyMinuteReadings,
+			visible: false
 		},
 		{
 			type: "line",
-			dataPoints: tenMinuteReadings
+			showInLegend: true,
+			legendText: "Best 15 Minutes",
+			dataPoints: fifteenMinuteReadings,
+			visible: false
 		},
 		{
 			type: "line",
-			dataPoints: fiveMinuteReadings
+			showInLegend: true,
+			legendText: "Best 10 Minutes",
+			dataPoints: tenMinuteReadings,
+			visible: false
 		},
 		{
 			type: "line",
-			dataPoints: oneMinuteReadings
+			showInLegend: true,
+			legendText: "Best 5 Minutes",
+			dataPoints: fiveMinuteReadings,
+			visible: false
+		},
+		{
+			type: "line",
+			showInLegend: true,
+			legendText: "Best 1 Minute",
+			dataPoints: oneMinuteReadings,
+			visible: false
 		}
     ]
   });
@@ -205,9 +236,6 @@ function  chartLoad() {
 };
 
 // blue = total, red = twenty, green/yellow = fifteen, cyan = 10, purple = 5, blue again for some reason = one minute
-
-
-
 
 setTimeout(function () {
 	window.onload = function(){
@@ -224,5 +252,5 @@ setTimeout(function () {
 		plotLine(10);
 		plotLine(5);
 		plotLine(1);
-	}
+	};
 }, 50);
