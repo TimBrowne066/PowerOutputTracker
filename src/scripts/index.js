@@ -161,7 +161,7 @@ function plotLine(length) {
 	runPath.setMap(map);
 }
 
-window.onload = function () {
+function  chartLoad() {
   var chart = new CanvasJS.Chart("chartContainer",
   {
     title:{
@@ -209,16 +209,20 @@ window.onload = function () {
 
 
 
-
-getPathCoordinates();
-initMap();
-calculatePowerByMinutes(20);
-calculatePowerByMinutes(15);
-calculatePowerByMinutes(10);
-calculatePowerByMinutes(5);
-calculatePowerByMinutes(1);
-plotLine(20);
-plotLine(15);
-plotLine(10);
-plotLine(5);
-plotLine(1);
+setTimeout(function () {
+	window.onload = function(){
+		getPathCoordinates();
+		initMap();
+		calculatePowerByMinutes(20);
+		calculatePowerByMinutes(15);
+		calculatePowerByMinutes(10);
+		calculatePowerByMinutes(5);
+		calculatePowerByMinutes(1);
+		chartLoad();
+		plotLine(20);
+		plotLine(15);
+		plotLine(10);
+		plotLine(5);
+		plotLine(1);
+	}
+}, 50);
