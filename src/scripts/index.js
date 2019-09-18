@@ -109,14 +109,14 @@ function calculatePowerByMinutes(minutes){
 
 //Initialize map with entire set of coordinates from JSON object and plot first polyline
 function initMap() {
-  totalLine = new google.maps.Polyline({
-    path: coordinates,
-    geodesic: true,
-    strokeColor: "#4F81BC",
-    strokeOpacity: 1.0,
-    strokeWeight: 5
-  });
-  totalLine.setMap(map);
+	totalLine = new google.maps.Polyline({
+		path: coordinates,
+		geodesic: true,
+		strokeColor: "#4F81BC",
+		strokeOpacity: 1.0,
+		strokeWeight: 5
+	});
+	totalLine.setMap(map);
 }
 
 //Plot individual lines and create objects for each average power output score by minutes, leaving all of them invisible except the entire dataset until toggled on
@@ -178,12 +178,12 @@ function plotLine(length) {
 
 //load data into chart from total data and minute ranged readings data.  Click handler to toggle map and graph sections on or off.
 function  chartLoad() {
-  var chart = new CanvasJS.Chart("chartContainer",
-  {
-	    title:{
-	    text: "Power Output Over Time",
+	var chart = new CanvasJS.Chart("chartContainer",
+	{
+		title:{
+			text: "Power Output Over Time",
 			fontFamily: "helvetica"
-	    },
+		},
 		axisX: {
 			title: "Time (Minutes)"
 		},
@@ -191,107 +191,108 @@ function  chartLoad() {
 			title: "Power"
 		},
 		legend: {
-            cursor: "pointer",
-            itemclick: function (e) {
-                if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-                    e.dataSeries.visible = false;
-				if(e.dataSeries.minutes == 9999){
-					totalLine.visible = false;
-					totalLine.setMap(map);
-				} else if (e.dataSeries.minutes == 20){
-					twentyLine.visible = false;
-					twentyLine.setMap(map);
-				} else if (e.dataSeries.minutes == 15){
-					fifteenLine.visible = false;
-					fifteenLine.setMap(map);
-				} else if (e.dataSeries.minutes == 10){
-					tenLine.visible = false;
-					tenLine.setMap(map);
-				} else if (e.dataSeries.minutes == 5){
-					fiveLine.visible = false;
-					fiveLine.setMap(map);
-				} else if (e.dataSeries.minutes == 1){
-					oneLine.visible = false;
-					oneLine.setMap(map);
+			cursor: "pointer",
+			itemclick: function (e) {
+				if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+					e.dataSeries.visible = false;
+					if(e.dataSeries.minutes == 9999){
+						totalLine.visible = false;
+						totalLine.setMap(map);
+					} else if (e.dataSeries.minutes == 20){
+						twentyLine.visible = false;
+						twentyLine.setMap(map);
+					} else if (e.dataSeries.minutes == 15){
+						fifteenLine.visible = false;
+						fifteenLine.setMap(map);
+					} else if (e.dataSeries.minutes == 10){
+						tenLine.visible = false;
+						tenLine.setMap(map);
+					} else if (e.dataSeries.minutes == 5){
+						fiveLine.visible = false;
+						fiveLine.setMap(map);
+					} else if (e.dataSeries.minutes == 1){
+						oneLine.visible = false;
+						oneLine.setMap(map);
+					}
+				} else {
+					e.dataSeries.visible = true;
+					if(e.dataSeries.minutes == 9999){
+						totalLine.visible = true;
+						totalLine.setMap(map);
+					} else if (e.dataSeries.minutes == 20){
+						twentyLine.visible = true;
+						twentyLine.setMap(map);
+					} else if (e.dataSeries.minutes == 15){
+						fifteenLine.visible = true;
+						fifteenLine.setMap(map);
+					} else if (e.dataSeries.minutes == 10){
+						tenLine.visible = true;
+						tenLine.setMap(map);
+					} else if (e.dataSeries.minutes == 5){
+						fiveLine.visible = true;
+						fiveLine.setMap(map);
+					} else if (e.dataSeries.minutes == 1){
+						oneLine.visible = true;
+						oneLine.setMap(map);
+					}
 				}
-                } else {
-                    e.dataSeries.visible = true;
-				if(e.dataSeries.minutes == 9999){
-					totalLine.visible = true;
-					totalLine.setMap(map);
-				} else if (e.dataSeries.minutes == 20){
-					twentyLine.visible = true;
-					twentyLine.setMap(map);
-				} else if (e.dataSeries.minutes == 15){
-					fifteenLine.visible = true;
-					fifteenLine.setMap(map);
-				} else if (e.dataSeries.minutes == 10){
-					tenLine.visible = true;
-					tenLine.setMap(map);
-				} else if (e.dataSeries.minutes == 5){
-					fiveLine.visible = true;
-					fiveLine.setMap(map);
-				} else if (e.dataSeries.minutes == 1){
-					oneLine.visible = true;
-					oneLine.setMap(map);
-				}
-                }
 
-                e.chart.render();
-            }
-	  },  animationEnabled: true,
-	  	backgroundColor:null,
-    data: [
-		{
-		      type: "line",
-			 showInLegend: true,
-			 legendText: "Entire Run",
-		      dataPoints: totalPowerReadings,
-			 minutes: 9999
+				e.chart.render();
+			}
 		},
-		{
-			type: "line",
-			showInLegend: true,
-			legendText: "Best 20 Minutes",
-			dataPoints: twentyMinuteReadings,
-			visible: false,
-			minutes: 20
-		},
-		{
-			type: "line",
-			showInLegend: true,
-			legendText: "Best 15 Minutes",
-			dataPoints: fifteenMinuteReadings,
-			visible: false,
-			minutes: 15
-		},
-		{
-			type: "line",
-			showInLegend: true,
-			legendText: "Best 10 Minutes",
-			dataPoints: tenMinuteReadings,
-			visible: false,
-			minutes: 10
-		},
-		{
-			type: "line",
-			showInLegend: true,
-			legendText: "Best 5 Minutes",
-			dataPoints: fiveMinuteReadings,
-			visible: false,
-			minutes: 5
-		},
-		{
-			type: "line",
-			showInLegend: true,
-			legendText: "Best 1 Minute",
-			dataPoints: oneMinuteReadings,
-			visible: false,
-			minutes: 1
-		}
-    ]
-  });
-  chart.render();
+		animationEnabled: true,
+		backgroundColor:null,
+		data: [
+			{
+				type: "line",
+				showInLegend: true,
+				legendText: "Entire Run",
+				dataPoints: totalPowerReadings,
+				minutes: 9999
+			},
+			{
+				type: "line",
+				showInLegend: true,
+				legendText: "Best 20 Minutes",
+				dataPoints: twentyMinuteReadings,
+				visible: false,
+				minutes: 20
+			},
+			{
+				type: "line",
+				showInLegend: true,
+				legendText: "Best 15 Minutes",
+				dataPoints: fifteenMinuteReadings,
+				visible: false,
+				minutes: 15
+			},
+			{
+				type: "line",
+				showInLegend: true,
+				legendText: "Best 10 Minutes",
+				dataPoints: tenMinuteReadings,
+				visible: false,
+				minutes: 10
+			},
+			{
+				type: "line",
+				showInLegend: true,
+				legendText: "Best 5 Minutes",
+				dataPoints: fiveMinuteReadings,
+				visible: false,
+				minutes: 5
+			},
+			{
+				type: "line",
+				showInLegend: true,
+				legendText: "Best 1 Minute",
+				dataPoints: oneMinuteReadings,
+				visible: false,
+				minutes: 1
+			}
+		]
+	});
+	chart.render();
 };
 
 
