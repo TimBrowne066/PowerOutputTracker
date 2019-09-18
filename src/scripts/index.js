@@ -55,12 +55,14 @@ function calculatePowerByMinutes(minutes){
 		total = total - samples[i - j].values.power;
 		total = total + samples[i].values.power;
 		var avg = total / j;
-		if (avg > best){
+		if (avg > best && avg > 0){
 			best = avg;
-			begin = i;
-			end = i + j;
+			begin = i - j;
+			end = i;
 		}
 	}
+
+
 	if(minutes == 20){
 		samples.forEach(function(sample, idx){
 			if(idx > begin && idx < end){
@@ -98,8 +100,10 @@ function calculatePowerByMinutes(minutes){
 			}
 		});
 	} else if (minutes == 1){
+
 		samples.forEach(function(sample, idx){
 			if(idx > begin && idx < end){
+
 				oneMinuteReadings.push({x: (sample.millisecondOffset/60000), y: sample.values.power});
 				if(sample.values.positionLat && sample.values.positionLong){
 					oneCoordinates.push({lat: sample.values.positionLat, lng: sample.values.positionLong});
@@ -224,17 +228,20 @@ function  chartLoad() {
 	var chart = new CanvasJS.Chart("chartContainer",
 	{
 		title:{
-			text: "Power Output Over Time",
-			fontFamily: "helvetica"
+			text: "POWER OUTPUT OVER TIME",
+			fontFamily: "monospace"
 		},
 		axisX: {
-			title: "Time (Minutes)"
+			title: "Time (Minutes)",
+			fontFamily: "monospace"
 		},
 		axisY: {
-			title: "Power"
+			title: "Power",
+			fontFamily: "monospace"
 		},
 		legend: {
 			cursor: "pointer",
+			fontColor: "white",
 			itemclick: function (e) {
 				if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
 					e.dataSeries.visible = false;
