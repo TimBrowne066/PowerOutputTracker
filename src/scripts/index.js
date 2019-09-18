@@ -175,14 +175,15 @@ function plotLine(length) {
 	}
 }
 
+
 //load data into chart from total data and minute ranged readings data.  Click handler to toggle map and graph sections on or off.
 function  chartLoad() {
   var chart = new CanvasJS.Chart("chartContainer",
   {
-    title:{
-    text: "Power Output Over Time",
-		fontFamily: "helvetica"
-    },
+	    title:{
+	    text: "Power Output Over Time",
+			fontFamily: "helvetica"
+	    },
 		axisX: {
 			title: "Time (Minutes)"
 		},
@@ -238,7 +239,8 @@ function  chartLoad() {
 
                 e.chart.render();
             }
-	  },
+	  },  animationEnabled: true,
+	  	backgroundColor:null,
     data: [
 		{
 		      type: "line",
@@ -291,6 +293,7 @@ function  chartLoad() {
   });
   chart.render();
 };
+
 
 
 //Allow graph and map libraries to load, was rendering slowly

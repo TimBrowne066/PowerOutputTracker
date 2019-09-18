@@ -12,15 +12,20 @@
 		function initMap() {
 			map = new google.maps.Map(document.getElementById('map'), {
 				center: {lat: 40.035271, lng: -105.1733},
-				zoom: 12.5
+				zoom: 12
 			});
 		}
 	</script>
 </head>
 <body>
-	<h1><span>WORKOUT POWER OUTPUT TRACKER</span></h1>
-	<p>A coding challenge for PeaksWare</p>
+	<div id="header">
+		<h1><span>WORKOUT POWER OUTPUT TRACKER</span></h1>
+		<p>A coding challenge for PeaksWare</p>
+	</div>
 	<div id="map"></div>
 	<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+	<div id="footer">
+
+	</div>
 </body>
 </html>
