@@ -23,6 +23,7 @@ var customCoordinates = [];
 var customLine;
 
 
+
 //Push GPS coordinates from raw data into coordinates array to be mapped and graphed
 function getPathCoordinates(){
 	samples.forEach(function(sample){
@@ -241,7 +242,8 @@ function  chartLoad() {
 		},
 		legend: {
 			cursor: "pointer",
-			fontColor: "white",
+			fontColor: "black",
+			backgroundColor: "#EBE9E5",
 			itemclick: function (e) {
 				if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
 					e.dataSeries.visible = false;
