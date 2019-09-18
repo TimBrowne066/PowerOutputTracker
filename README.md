@@ -1,3 +1,6 @@
+# Power Output Tracker
+## A coding challenge for PeaksWare
+
 ## To start the application:
 - ```npm install```
 - ```npm start```
