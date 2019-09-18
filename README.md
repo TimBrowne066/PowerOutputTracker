@@ -12,7 +12,7 @@
 
 ## To select a custom time range:
 - You may click and drag to select any portion of the graph to select and highlight a custom range of data.
-- The map will dynamically update with your custom data range upon making you selection.
+- The map will dynamically update with your custom data range upon making your selection.
 - To deselect the custom range from the graph and map, simply click on the reset button at the top right of the graph.
 
 
