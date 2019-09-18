@@ -19,6 +19,8 @@ var fifteenLine;
 var tenLine;
 var fiveLine;
 var oneLine;
+var customCoordinates = [];
+var customLine;
 
 
 //Push GPS coordinates from raw data into coordinates array to be mapped and graphed
@@ -172,8 +174,49 @@ function plotLine(length) {
 
 		});
 		oneLine.setMap(map);
+	} else if (length == -1 ){
+		customLine = new google.maps.Polyline({
+			path: customCoordinates,
+			geodesic: true,
+			strokeColor: "black",
+			strokeOpacity: 1.0,
+			strokeWeight: 7
+		});
+		customLine.setMap(map);
 	}
 }
+
+//Allow for dynamic custom range selection.  Highlight graph and map with corresponding range.
+function changeSelectedDataPoints(e) {
+	customCoordinates = [];
+	if (customLine){
+		customLine.setMap(null);
+	}
+  var data = e.chart.options.data;
+  if (!e.chart.options.axisX)
+    e.chart.options.axisX = {};
+
+  var axisX = e.axisX[0];
+
+	samples.forEach(function(sample){
+		if ((sample.millisecondOffset > (axisX.viewportMinimum * 60000) && sample.millisecondOffset < (axisX.viewportMaximum * 60000)) && sample.values.positionLat && sample.values.positionLong){
+			customCoordinates.push({lat: sample.values.positionLat, lng: sample.values.positionLong});
+		}
+	});
+
+  for (var i = 0; i < data.length; i++) {
+    var dataPoints = data[i].dataPoints;
+    for (var j = 0; j < dataPoints.length; j++) {
+      if (dataPoints[j].x > axisX.viewportMinimum && dataPoints[j].x < axisX.viewportMaximum) {
+        dataPoints[j].lineColor = dataPoints[j].color = "black";
+      } else
+        dataPoints[j].lineColor = dataPoints[j].color = null;
+    }
+  }
+  e.chart.options.axisX.viewportMinimum = e.chart.options.axisX.viewportMaximum = null;
+	plotLine(-1);
+}
+
 
 
 //load data into chart from total data and minute ranged readings data.  Click handler to toggle map and graph sections on or off.
@@ -241,7 +284,9 @@ function  chartLoad() {
 			}
 		},
 		animationEnabled: true,
-		backgroundColor:null,
+		backgroundColor: null,
+		zoomEnabled: true,
+		rangeChanging: changeSelectedDataPoints,
 		data: [
 			{
 				type: "line",
