@@ -1,3 +1,7 @@
+## To start the application:
+- ```npm install```
+- ```npm start```
+
 ## To select predefined time ranges:
 - Below the graph, click on the desired predefined time frame key (Entire Run, Best 20, 15, 10, 5, or 1 minute periods) in the legend to see the line plotted on the graph and the route plotted on the map.  
 - You can deselect any of the ranges by clicking again on the key in the legend.
