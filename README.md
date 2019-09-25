@@ -1,5 +1,5 @@
 # Power Output Tracker
-## A coding challenge for PeaksWare
+## A pure JavaScript data visualazation exercise
 
 ## To start the application:
 - ```npm install```
